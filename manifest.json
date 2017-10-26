@@ -1,0 +1,23 @@
+{
+	"manifest_version": 2,
+
+	"name": "Fuck AngelList",
+	"description":
+		"This extension will try and apply to every job in your search query",
+	"version": "1.0",
+	"permissions": ["http://*/*", "https://*/*"],
+	"web_accessible_resources": ["popup.js", "popup.css"],
+	"browser_action": {
+		"default_icon": "38095-200.png"
+	},
+	"background": {
+		"scripts": ["action.js"],
+		"persistent": false
+	},
+	"content_scripts": [
+		{
+			"matches": ["https://angel.co/jobs*"],
+			"js": ["inject.js"]
+		}
+	]
+}
