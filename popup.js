@@ -1,19 +1,3 @@
-// const mySkills = [
-//   "Java",
-//   "Javascript",
-//   "Ruby on Rails",
-//   "Ruby",
-//   "Adobe Photoshop",
-//   "Cascading Style Sheet (CSS)",
-//   "React.js",
-//   "React/Redux",
-//   "HTML",
-//   "SCSS",
-//   "SASS",
-//   "Firebase",
-//   "PostgreSQL"
-// ];
-
 function makeSentence(array) {
   let string = "";
   array.forEach((word, index) => {
@@ -50,9 +34,9 @@ let mySkills = [
 ];
 
 const createMessage = (founder, title, company, jobTags) => {
-  // let founder = $("a.profile-link")[0].text.split(" ")[0];
-
-  let skills = makeSentence(commonValues(jobTags, mySkills)) || "Javascript, Ruby, and Python, and their various implementations;"
+  let skills =
+    makeSentence(commonValues(jobTags, mySkills)) ||
+    "Javascript, Ruby, and Python, and their various implementations;";
 
   return (
     "Hello " +
@@ -68,7 +52,7 @@ const createMessage = (founder, title, company, jobTags) => {
   );
 };
 
-const apply = (index) => {
+const apply = index => {
   if ($(".add-note-button > a.g-button.blue:visible").length == 0) {
     $(".browse_startups_table_row:visible")
       .first()
@@ -77,10 +61,10 @@ const apply = (index) => {
   $(".add-note-button > a.g-button.blue:visible")
     .first()
     .click();
-    let founder = $('textarea.interested-note')[index].placeholder.split(' ')[4];
-    let title = $("div.title a")[index].text;
-    let company = $("a.startup-link")[index].text;
-    let jobTags = $.trim($("div.tags")[index].textContent).split(" · ");
+  let founder = $("textarea.interested-note")[index].placeholder.split(" ")[4];
+  let title = $("div.title a")[index].text;
+  let company = $("a.startup-link")[index].text;
+  let jobTags = $.trim($("div.tags")[index].textContent).split(" · ");
   $(".interested-note:visible")
     .first()
     .val(createMessage(founder, title, company, jobTags));
@@ -88,13 +72,12 @@ const apply = (index) => {
     .first()
     .click();
 
-
   $(".js-done").click();
   $("html, body").animate({
     scrollTop: $(document).height() - $(window).height()
   });
   index += 1;
-  setTimeout(() => apply(index), 4000);
+  setTimeout(() => apply(index), 2000);
 };
 
 const $button = $("<input>");
@@ -109,10 +92,8 @@ $button.on("click", () => {
 });
 
 const insertApplyButton = () => {
-  console.log("testing chrome reload");
   let oldButton = $("button.c-button.c-button--transparent");
   if (oldButton.length > 0) {
-    console.log(oldButton);
     return oldButton.replaceWith($button);
   } else {
     console.log("retrying");
@@ -124,13 +105,3 @@ let currentPage = window.location.href;
 if (currentPage === "https://angel.co/jobs") {
   insertApplyButton();
 }
-
-// $( document ).ready(function() {
-//
-// })
-
-// setInterval(() => {
-//   if (currentPage === "https://angel.co/jobs") {
-//     insertApplyButton();
-//   }
-// }, 2000);
