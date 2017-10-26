@@ -31,10 +31,7 @@ function commonValues(arr1, arr2) {
     return arr2.indexOf(value) > -1;
   });
 }
-let founderName = $("a.profile-link")[0].text.split(" ")[0];
-let jobTitle = $("div.title a")[0].text;
-let company = $("a.startup-link")[0].text;
-let jobTags = $.trim($("div.tags")[0].textContent).split(" · ");
+
 let mySkills = [
   "Java",
   "Javascript",
@@ -48,22 +45,30 @@ let mySkills = [
   "SCSS",
   "SASS",
   "Firebase",
-  "PostgreSQL"
+  "PostgreSQL",
+  "React Native"
 ];
 
-const createMessage = (founder, title, company, jobTags) =>
-  "Hello " +
-  founder +
-  "," +
-  "\nI am a Software Engineer, and I would to apply for the position of " +
-  title +
-  " over at " +
-  company +
-  ". I am experienced in " +
-  makeSentence(commonValues(jobTags, mySkills)) +
-  " and there's no time like the present to learn something new. Problem Solving is my biggest drive, I love tackling challenges. As you're no doubt aware, this blurb seems generic, and thats because it is. This message is 100% automated, and thats why I think you should hire me. \nBest,\nWadah Adlan";
+const createMessage = (founder, title, company, jobTags) => {
+  // let founder = $("a.profile-link")[0].text.split(" ")[0];
 
-const apply = () => {
+  let skills = makeSentence(commonValues(jobTags, mySkills)) || "Javascript, Ruby, and Python, and their various implementations;"
+
+  return (
+    "Hello " +
+    founder +
+    "," +
+    "\nI am a Software Engineer, and I would to apply for the position of " +
+    title +
+    " over at " +
+    company +
+    ". I am experienced in " +
+    skills +
+    " and I feel there's no time like the present to learn something new. Problem Solving is my biggest motivator, as I love tackling challenges. As you're no doubt aware, this blurb seems generic, and thats because it is. This message is 100% automated, and thats why I think you should hire me. \nBest,\nWadah Adlan"
+  );
+};
+
+const apply = (index) => {
   if ($(".add-note-button > a.g-button.blue:visible").length == 0) {
     $(".browse_startups_table_row:visible")
       .first()
@@ -72,27 +77,24 @@ const apply = () => {
   $(".add-note-button > a.g-button.blue:visible")
     .first()
     .click();
-  let founderName = $("a.profile-link")[0].text.split(" ")[0];
-  let jobTitle = $("div.title a")[0].text;
-  let company = $("a.startup-link")[0].text;
-  let tags = $.trim($("div.tags")[0].textContent).split(" · ");
+    let founder = $('textarea.interested-note')[index].placeholder.split(' ')[4];
+    let title = $("div.title a")[index].text;
+    let company = $("a.startup-link")[index].text;
+    let jobTags = $.trim($("div.tags")[index].textContent).split(" · ");
   $(".interested-note:visible")
     .first()
-    .val(createMessage(founderName, jobTitle, company));
+    .val(createMessage(founder, title, company, jobTags));
   $("a.g-button.blue.interested-with-note-button:visible")
     .first()
     .click();
 
-  let message = `Hello  $(founderName), \n I am a Software Engineer, and I would really love to apply for the position of $(jobTitle) at $(company)`;
-  console.log("I am well versed in " + makeSentence(tags));
-  console.log("Job Title: " + jobTitle);
-  console.log("Company: " + company);
-  debugger;
-  // $(".js-done").click();
+
+  $(".js-done").click();
   $("html, body").animate({
     scrollTop: $(document).height() - $(window).height()
   });
-  setTimeout(apply, 4000);
+  index += 1;
+  setTimeout(() => apply(index), 4000);
 };
 
 const $button = $("<input>");
@@ -102,8 +104,8 @@ $button.attr({
   value: "Apply to All The Jobs!!!"
 });
 $button.addClass("g-button blue interested-button");
-$button.click(() => {
-  apply();
+$button.on("click", () => {
+  apply(0);
 });
 
 const insertApplyButton = () => {
@@ -118,18 +120,17 @@ const insertApplyButton = () => {
   }
 };
 //
-// if (currentPage === "https://angel.co/jobs") {
-//   insertApplyButton();
-// }
+let currentPage = window.location.href;
+if (currentPage === "https://angel.co/jobs") {
+  insertApplyButton();
+}
 
 // $( document ).ready(function() {
 //
 // })
 
-let currentPage = window.location.href;
-setInterval(() => {
-  debugger
-  if (currentPage === "https://angel.co/jobs") {
-    insertApplyButton();
-  }
-}, 2000);
+// setInterval(() => {
+//   if (currentPage === "https://angel.co/jobs") {
+//     insertApplyButton();
+//   }
+// }, 2000);
