@@ -7,8 +7,11 @@
 	"version": "1.0",
 	"permissions": ["http://*/*", "https://*/*"],
 	"web_accessible_resources": ["popup.js", "popup.css"],
+	"icons": {
+		"128": "icon.png"
+	},
 	"browser_action": {
-		"default_icon": "38095-200.png"
+		"default_icon": "icon.png"
 	},
 	"background": {
 		"scripts": ["action.js"],
