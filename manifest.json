@@ -1,10 +1,10 @@
 {
 	"manifest_version": 2,
 
-	"name": "Fuck AngelList",
+	"name": "Devil's List",
 	"description":
 		"This extension will try and apply to every job in your search query",
-	"version": "1.0",
+	"version": "1.2",
 	"permissions": ["http://*/*", "https://*/*"],
 	"web_accessible_resources": ["popup.js", "popup.css"],
 	"icons": {

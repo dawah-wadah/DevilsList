@@ -92,7 +92,8 @@ $button.on("click", () => {
 });
 
 const insertApplyButton = () => {
-  let oldButton = $("button.c-button.c-button--transparent");
+  let oldButton = $("div.label-container");
+  // let oldButton = $("button.c-button.c-button--transparent");
   if (oldButton.length > 0) {
     return oldButton.replaceWith($button);
   } else {
